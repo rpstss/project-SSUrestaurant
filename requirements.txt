@@ -5,3 +5,5 @@ pillow
 numpy
 streamlit
 scikit-learn
+requests
+io
