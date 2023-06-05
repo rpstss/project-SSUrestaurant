@@ -7,8 +7,7 @@ import requests
 from io import BytesIO
 from matplotlib import font_manager
 
-# 한글 변수 이름이 깨짐을 방지하기 위해 font 바꾸기
-# GitHub에서 폰트 파일의 Raw URL
+
 
 # 첫 번째 폰트 파일 다운로드
 font_url1 = "https://github.com/rpstss/project-SSUrestaurant/raw/main/NanumGothic.ttf"
@@ -26,6 +25,7 @@ with open("Arial Unicode MS.ttf", "wb") as f2:
 font_manager.fontManager.addfont("NanumGothic.ttf")
 font_manager.fontManager.addfont("Arial Unicode MS.ttf")
 
+# 한글 변수 이름이 깨짐을 방지하기 위해 font 바꾸기
 plt.rcParams['font.family'] = 'NanumGothic'
 
 raw_df=pd.read_csv("https://raw.githubusercontent.com/rpstss/project-SSUrestaurant/main/%EC%88%AD%EC%8B%A4%EB%8C%80.csv",encoding="cp949") # 식당 데이터 엑셀으로 raw 데이터 프레임 생성
