@@ -8,7 +8,7 @@ from io import BytesIO
 
 
  # 한글 변수 이름이 깨짐을 방지하기 위해 font 바꾸기
-plt.rcParams.update({"font.family":"Malgun Gothic"})
+plt.rcParams.update({"font.family":"Nanum KoKoCe"})
 
 raw_df=pd.read_csv("https://raw.githubusercontent.com/rpstss/project-SSUrestaurant/main/%EC%88%AD%EC%8B%A4%EB%8C%80.csv",encoding="cp949") # 식당 데이터 엑셀으로 raw 데이터 프레임 생성
 raw_copy=raw_df.copy() # 혹시 모를 데이터 정보 수정을 위해, raw_df의 복제본 생성
