@@ -284,7 +284,7 @@ with col7:
     if option=="hex":
         
         # jointplot을 그리는 시간이 너무 오래 걸려서 이미지로 대체함
-        image_url = "https://github.com/rpstss/project-SSUrestaurant/raw/1466667d1e95cd6da3e50e4a91f47de3974f112e/scatter.jpg"
+        image_url = "https://github.com/rpstss/project-SSUrestaurant/raw/b68ddaf10cc39b793493c770d03d2ef950faf398/hex.jpg"
 
         # 이미지 다운로드
         response = requests.get(image_url)
