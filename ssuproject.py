@@ -5,8 +5,7 @@ from PIL import Image
 import numpy as np
 import requests
 from io import BytesIO
-from matplotlib import font_manager
-font_manager.findfont('Arial Unicode MS')
+
 
  # 한글 변수 이름이 깨짐을 방지하기 위해 font 바꾸기
 plt.rcParams.update({"font.family":"Malgun Gothic"})
