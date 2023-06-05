@@ -5,10 +5,28 @@ from PIL import Image
 import numpy as np
 import requests
 from io import BytesIO
+from matplotlib import font_manager
 
+# 한글 변수 이름이 깨짐을 방지하기 위해 font 바꾸기
+# GitHub에서 폰트 파일의 Raw URL
 
- # 한글 변수 이름이 깨짐을 방지하기 위해 font 바꾸기
-plt.rcParams.update({"font.family":"Nanum KoKoCe"})
+# 첫 번째 폰트 파일 다운로드
+font_url1 = "https://github.com/rpstss/project-SSUrestaurant/raw/main/NanumGothic.ttf"
+response1 = requests.get(font_url1)
+with open("NanumGothic.ttf", "wb") as f1:
+    f1.write(response1.content)
+
+# 두 번째 폰트 파일 다운로드
+font_url2 = "https://github.com/rpstss/project-SSUrestaurant/raw/main/Arial%20Unicode%20MS.TTF"
+response2 = requests.get(font_url2)
+with open("Arial Unicode MS.ttf", "wb") as f2:
+    f2.write(response2.content)
+
+# 폰트 파일 로드
+font_manager.fontManager.addfont("NanumGothic.ttf")
+font_manager.fontManager.addfont("Arial Unicode MS.ttf")
+
+plt.rcParams['font.family'] = 'NanumGothic'
 
 raw_df=pd.read_csv("https://raw.githubusercontent.com/rpstss/project-SSUrestaurant/main/%EC%88%AD%EC%8B%A4%EB%8C%80.csv",encoding="cp949") # 식당 데이터 엑셀으로 raw 데이터 프레임 생성
 raw_copy=raw_df.copy() # 혹시 모를 데이터 정보 수정을 위해, raw_df의 복제본 생성
@@ -219,7 +237,9 @@ for i in range(len(raw_copy["name"])): # 식당의 개수만큼 반복문 실시
 
 raw_copy["평균 가격"]=raw_copy["평균 가격"].round(1)
 
-plt.rcParams['font.family'] = 'Arial Unicode MS' # 맑은 고딕 폰트에서는 '-'가 없어서 오류가남. 폰트 변경
+plt.rcParams['font.family'] = 'Arial Unicode MS'
+
+
 raw_copy=raw_copy.rename(columns={"review_num":"리뷰 개수"})  # review_num 변수의 이름을 '리뷰 개수'로 변경
 
 st.subheader(":blue[상관관계 분석]")
