@@ -9,14 +9,14 @@ from matplotlib import font_manager
 
 
 
-# 첫 번째 폰트 파일 다운로드
-font_url1 = "https://github.com/rpstss/project-SSUrestaurant/raw/main/NanumGothic.ttf"
+# 첫 번째 폰트 파일 다운로드.
+font_url1 = "https://github.com/rpstss/project-SSUrestaurant/raw/main/NanumGothic.ttf" # 나눔고딕 ttf입니다.
 response1 = requests.get(font_url1)
 with open("NanumGothic.ttf", "wb") as f1:
     f1.write(response1.content)
 
 # 두 번째 폰트 파일 다운로드
-font_url2 = "https://github.com/rpstss/project-SSUrestaurant/raw/main/Arial%20Unicode%20MS.TTF"
+font_url2 = "https://github.com/rpstss/project-SSUrestaurant/raw/main/Arial%20Unicode%20MS.TTF" # airal unicode ms ttf입니다.
 response2 = requests.get(font_url2)
 with open("Arial Unicode MS.ttf", "wb") as f2:
     f2.write(response2.content)
@@ -28,7 +28,7 @@ font_manager.fontManager.addfont("Arial Unicode MS.ttf")
 # 한글 변수 이름이 깨짐을 방지하기 위해 font 바꾸기
 plt.rcParams['font.family'] = 'NanumGothic'
 
-raw_df=pd.read_csv("https://raw.githubusercontent.com/rpstss/project-SSUrestaurant/main/%EC%88%AD%EC%8B%A4%EB%8C%80.csv",encoding="cp949") # 식당 데이터 엑셀으로 raw 데이터 프레임 생성
+raw_df=pd.read_csv("https://raw.githubusercontent.com/rpstss/project-SSUrestaurant/main/%EC%88%AD%EC%8B%A4%EB%8C%80.csv",encoding="cp949") # 식당 데이터 csv으로 raw 데이터 프레임 생성
 raw_copy=raw_df.copy() # 혹시 모를 데이터 정보 수정을 위해, raw_df의 복제본 생성
 
 
@@ -115,7 +115,7 @@ def hist_star(x): # 카테고리별 평점 분포 히스토그램 작성 함수
     a= sns.histplot(data=raw_copy.query("category== '%s'"%x),x="평점",kde=True)
     return a
 
-def box_star(x): # 카테고리별 상자 그래프 작성 함수
+def box_star(x): # 카테고리별 평점 상자 그래프 작성 함수
     a=sns.boxplot(data=raw_copy.query("category== '%s'"%x),y="평점")
     return a
 
@@ -255,7 +255,8 @@ with col6:
     
     # 전체 식당의 가격, 평점, 리뷰 개수 사이의 상관관계 히트맵
     heatmap_all=sns.heatmap(data = raw_copy[["평균 가격","평점","리뷰 개수"]].corr(),
-                        annot=True, fmt = '.1f', linewidths=.5, cmap='Blues')
+                        annot=True, # 각 셀에 숫자값 표시
+                        fmt = '.1f', linewidths=.5, cmap='Blues')
     st.pyplot(fig_5)
         
 
@@ -266,6 +267,7 @@ with col7:
     option = st.radio(
     'type select',
     ('scatter', 'hex')) #  산점도를 hex로 할지 그냥 단순한 산점도를 할지 선택하는 라디오 버튼 생성
+    # hex는 육각형 빈도 그래프
     
     if option=="scatter":
         
@@ -273,8 +275,9 @@ with col7:
         # 이미지 URL
         image_url = "https://github.com/rpstss/project-SSUrestaurant/raw/1466667d1e95cd6da3e50e4a91f47de3974f112e/scatter.jpg"
         # 이미지 다운로드
-        response = requests.get(image_url)
-        image = Image.open(BytesIO(response.content))
+        response = requests.get(image_url) # url의 이미지 가져오기
+        image = Image.open(BytesIO(response.content)) # resonse.content는 내용을 바이트 형식으로 변환, 
+# resonse.content는 내용을 바이트 형식으로 변환, BytesIO() 는 바이트 형식의 이미지를 메모리 객체로 변환
 
         # 이미지 출력
         st.image(image)
@@ -363,7 +366,7 @@ with col8:
     fig_7=plt.figure()
     
     # 전체 식당의 메뉴 평균 가격 분포 히스토그램
-    histplot_price_of_all=sns.histplot(data=raw_copy,x="평균 가격",kde=True) 
+    histplot_price_of_all=sns.histplot(data=raw_copy,x="평균 가격",kde=True)  # kde는 커널 밀도 추정 곡선
     st.pyplot(fig_7)
 
 
@@ -411,10 +414,8 @@ with col11:
     # Streamlit 앱에 이미지 표시
     st.image(image)
     
-        
     
 st.markdown("---")
-
 
 
 # 식당 추천
